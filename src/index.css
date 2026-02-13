@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Shared UI utilities (minimal, non-breaking) */
+:root {
+	--color-indigo-600: #4f46e5;
+	--color-indigo-700: #4338ca;
+}
+
+/* Button utilities to keep button styles consistent across the app */
+.btn {
+	@apply inline-flex items-center justify-center font-semibold rounded-full transition duration-300 ease-in-out;
+}
+.btn-primary {
+	@apply bg-indigo-600 hover:bg-indigo-700 text-white shadow-md;
+}
+.btn-full {
+	@apply w-full;
+}
+.btn-ghost {
+	@apply bg-gray-300 hover:bg-gray-400 text-gray-800;
+}
+
+/* Card utility for simple white cards */
+.card {
+	@apply bg-white rounded-lg shadow-md p-6;
+}
+
+/* Slot button helper */
+.slot {
+	@apply px-4 py-2 bg-yellow-200 text-gray-800 rounded hover:bg-yellow-300 transition;
+}
