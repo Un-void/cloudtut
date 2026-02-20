@@ -2,27 +2,27 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                echo 'Checking out source code...'
+                echo 'Cloning repository...'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                bat 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building project...'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
+                bat 'npm run build'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
+                bat 'start /B node app.js'
             }
         }
     }
