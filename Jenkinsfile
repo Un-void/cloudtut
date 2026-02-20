@@ -2,27 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Cloning repository...'
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
             }
         }
 
-        stage('Build') {
+        stage('Build React App') {
             steps {
                 bat 'npm run build'
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy Locally') {
             steps {
-                bat 'start /B node app.js'
+                bat 'npm install -g serve'
+                bat 'start /B serve -s build -l 3000'
             }
         }
     }
