@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     stages {
-        stage('Install') {
+
+        stage('Install Dependencies') {
             steps {
                 bat 'npm install'
             }
@@ -12,6 +13,15 @@ pipeline {
             steps {
                 bat 'npm run build'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build Successful!'
+        }
+        failure {
+            echo 'Build Failed!'
         }
     }
 }
