@@ -31,20 +31,22 @@ pipeline {
         stage('Checkout Selenium Tests') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/Un-void/cloudtut.git',
+                    url: "https://github.com/Un-void/selenium-tests.git",
                     credentialsId: 'github-token'
             }
         }
 
         stage('Run Selenium Tests') {
             steps {
-                bat 'mvn clean test'
+                dir('selenium-tests') {
+                    bat 'mvn clean test'
+                }
             }
         }
 
         stage('Publish Results') {
             steps {
-                publishTestNGResults testResultsPattern: '**/target/surefire-reports/testng-results.xml'
+                publishTestNGResults testResultsPattern: '**/selenium-tests/target/surefire-reports/testng-results.xml'
             }
         }
     }
