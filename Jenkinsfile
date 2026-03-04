@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout App') {
+        stage('Checkout Tests') {
             steps {
-                git branch: 'main', url: 'https://github.com/Un-void/cloudtut.git'
+                git branch: 'main',
+                    url: 'https://github.com/Un-void/cloudtut.git',
+                    credentialsId: 'github-token'
             }
         }
 
