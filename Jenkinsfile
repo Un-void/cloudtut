@@ -31,7 +31,7 @@ pipeline {
         stage('Checkout Selenium Tests') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/Un-void/selenium-tests.git',
+                    url: 'https://github.com/Un-void/cloudtut.git',
                     credentialsId: 'github-token'
             }
         }
