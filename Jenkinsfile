@@ -42,6 +42,13 @@ pipeline {
             }
         }
 
+        stage('Start App Server') {
+            steps {
+                bat 'npx serve -s dist -l 3000 &'
+                sleep(time: 10, unit: 'SECONDS') // wait for server to start
+            }
+        }
+
         stage('Publish Results') {
             steps {
                 publishTestNGResults testResultsPattern: '**/selenium-tests/target/surefire-reports/testng-results.xml'
