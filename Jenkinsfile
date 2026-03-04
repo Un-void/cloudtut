@@ -38,9 +38,7 @@ pipeline {
 
         stage('Run Selenium Tests') {
             steps {
-                dir('selenium-tests') {
-                    bat 'mvn clean test'
-                }
+                bat 'mvn clean test'
             }
         }
 
