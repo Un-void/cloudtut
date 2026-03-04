@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout Tests') {
+        stage('Checkout App') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/Un-void/cloudtut.git',
@@ -28,9 +28,11 @@ pipeline {
             }
         }
 
-        stage('Checkout Tests') {
+        stage('Checkout Selenium Tests') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-org/selenium-tests.git'
+                git branch: 'main',
+                    url: 'https://github.com/Un-void/selenium-tests.git',
+                    credentialsId: 'github-token'
             }
         }
 
