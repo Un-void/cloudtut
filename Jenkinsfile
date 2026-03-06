@@ -28,7 +28,7 @@ pipeline {
         stage('Start App Server') {
             steps {
                 bat 'start /B npm run dev'
-                bat 'ping 127.0.0.1 -n 10 > nul'
+                sleep 10
             }
         }
 
