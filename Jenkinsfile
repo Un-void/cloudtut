@@ -4,6 +4,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout App') {
             steps {
                 git branch: 'main',
@@ -24,38 +25,34 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Start App Server') {
             steps {
-                bat 'echo Deploying React app...'
+                bat 'start /B npm run dev'
+                bat 'timeout /t 10'
             }
         }
 
         stage('Checkout Selenium Tests') {
             steps {
-                git branch: 'main',
-                    url: "https://github.com/Un-void/selenium-tests.git",
-                    credentialsId: 'github-token'
+                dir('selenium-tests') {
+                    git branch: 'main',
+                        url: 'https://github.com/Un-void/selenium-tests.git',
+                        credentialsId: 'github-token'
+                }
             }
         }
 
         stage('Run Selenium Tests') {
             steps {
-                bat 'mvn clean test'
-            }
-        }
-
-        stage('Start App Server') {
-            steps {
-                bat "start /B npm run dev"
-                timeout(time: 30, unit: 'SECONDS') {
-                bat "ping 127.0.0.1 -n 10"
+                dir('selenium-tests') {
+                    bat 'mvn clean test'
                 }
             }
         }
 
         stage('Publish Results') {
             steps {
-                publishTestNGResults testResultsPattern: '**/selenium-tests/target/surefire-reports/testng-results.xml'
+                publishTestNGResults testResultsPattern: '**/target/surefire-reports/testng-results.xml'
             }
         }
     }
