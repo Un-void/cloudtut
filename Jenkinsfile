@@ -1,3 +1,5 @@
+//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
+// Jenkins github-token
 pipeline {
     agent any
 
