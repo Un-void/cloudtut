@@ -46,8 +46,10 @@ pipeline {
 
         stage('Start App Server') {
             steps {
-                bat 'npx serve -s dist -l 3000 &'
-                sleep(time: 10, unit: 'SECONDS') // wait for server to start
+                bat "start /B npm run dev"
+                timeout(time: 30, unit: 'SECONDS') {
+                bat "ping 127.0.0.1 -n 10"
+                }
             }
         }
 
