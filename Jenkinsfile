@@ -28,7 +28,7 @@ pipeline {
         stage('Start App Server') {
             steps {
                 bat 'start /B npm run dev'
-                sleep 10
+                sleep 40
             }
         }
 
