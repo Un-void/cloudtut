@@ -55,5 +55,11 @@ pipeline {
                 publishTestNGResults testResultsPattern: '**/target/surefire-reports/testng-results.xml'
             }
         }
+
+        stage('Publish Results') {
+            steps {
+                junit 'selenium-tests/target/surefire-reports/*.xml'
+            }
+        }
     }
 }
